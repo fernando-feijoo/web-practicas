@@ -12,14 +12,14 @@ body {
     padding-bottom: 400px; /* Adecua este valor para controlar la altura del video */
     position:relative;
     height:0;
-    display: flex; /* Con estas lineas se alinea el contenido*/
-    justify-content: center;
 }
-.video-responsive .player{
+.video-responsive #player{
     left:0;
     top:0;
     height:100%;
     width:100%;
     position:absolute;
+    display: flex; /* Con estas lineas se alinea el contenido*/
+    justify-content: center;
 }
 /* End: Video Responsive */

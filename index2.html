@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="./csslocal/index.css" rel="stylesheet" />
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <title>Pagina TV</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  </head>
+  <body>
+    <header>
+      <!-- Menu del sitio -->
+      <nav class="navbar navbar-expand-lg bg-light fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">Logo de la empresa</a>
+          <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page"
+                  href="#">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#noticias">Noticias</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">En Vivo</a>
+              </li>
+            </ul>
+            <!-- Area de Busqueda -->
+            <nav class="navbar bg-light ">
+              <div class="container justify-content-center">
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search"
+                    placeholder="Buscar" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+              </div>
+            </nav>
+            <!-- / Area de Busqueda -->
+          </div>
+        </div>
+      </nav>
+      <!-- / Menu del sitio -->
+    </header>
+    <main>
+      <!-- Secciones del Main -->
+      <section id="primera-seccion" class="mb-3">
+        <nav class="container">
+          <nav class="row">
+            <!-- Columna de la Izquierda -->
+            <nav class="pt-2 d-none d-lg-block col-3">
+              Redes Sociales
+              <!-- Card de redes sociales -->
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural
+                    lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Facebook</a>
+                </div>
+              </div>
+              <div class="card mt-2">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural
+                    lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Twitter</a>
+                </div>
+              </div>
+              <!-- / Card de redes sociales -->
+            </nav>
+            <!-- / Columna de la Izquierda -->
+
+            <!-- Columna del Centro -->
+            <nav class="pt-2 col-12 col-sm-8 col-md-8 col-lg-6">
+              <p class="text-center fw-bold">Video en vivo</p>
+              <!-- Video de la web "en vivo" -->
+              <div class="video-responsive">
+              <!-- Crea un elemento de video -->
+              <video id="mi-reproductor" controls></video>
+
+              <!-- Inicializa HLS.js y carga el archivo m3u8 -->
+<script>
+  var reproductor = document.getElementById('mi-reproductor');
+  if(Hls.isSupported()) {
+    var hls = new Hls();
+    hls.loadSource('http://160.20.164.171:25461/live/0703049528/mo73/1.m3u8');
+    hls.attachMedia(reproductor);
+    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+      reproductor.play();
+    });
+  }
+  // En caso contrario, intenta utilizar el reproductor nativo de HLS del navegador
+  else if (reproductor.canPlayType('application/vnd.apple.mpegurl')) {
+    reproductor.src = 'http://160.20.164.171:25461/live/0703049528/mo73/1.m3u8';
+    reproductor.addEventListener('loadedmetadata', function() {
+      reproductor.play();
+    });
+  }
+  
+  // Actualiza el buffer cada 5 segundos
+  setInterval(function() {
+    hls.startLoad(reproductor.currentTime);
+  }, 5000);
+</script>
+              </div>
+              <!-- / Video de la web "en vivo" -->
+            </nav>
+            <!-- / Columna del Centro -->
+
+            <!-- Columna de la Derecha -->
+            <nav class="pt-2 col-12 col-sm-4 col-lg-3">
+              <section>
+                <form class="mx-auto small" style="width: 75%;">
+                  <div class="mb-1">
+                    <label for="exampleInputEmail1" class="form-label">Usuario</label>
+                    <input type="email" class="form-control"
+                      id="exampleInputEmail1" aria-describedby="emailHelp"
+                      style="height: 25px;">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control"
+                      id="exampleInputPassword1" style="height: 25px;">
+                  </div>
+                  <button type="submit" class="btn btn-outline-primary mb-2
+                    btn-sm">Iniciar
+                    Sesion</button>
+                </form>
+              </section>
+              Publicidad
+              <!-- Card de publicidad -->
+              <div class="card mt-2">
+                <img src="img/publicidad-img.png" class="card-img-top"
+                  alt="imagen publicidad">
+                <div class="card-body">
+                  <p class="card-text">Some quick example text to build on the
+                    card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+              <!-- /Card de publicidad -->
+            </nav>
+            <!-- / Columna de la Derecha -->
+          </nav>
+        </nav>
+      </section>
+      <section id="segunda-seccion" class="bg-light pt-3 pb-3">
+        <nav class="container">
+          <p class="fw-bold" id="noticias">Noticias</p>
+          <!-- Cards de Noticias -->
+          <div class="card-group ">
+            <div class="card">
+              <img src="./img/noticias-img.jpg" class="card-img-top" alt="imgaen
+                noticias">
+              <div class="card-body">
+                <a href="#" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"><h5 class="card-title">Noticias</h5></a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1"
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Más
+                          sobre la Noticia</h1>
+                        <button type="button" class="btn-close"
+                          data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Ut metus tortor, ullamcorper a tristique eu, rutrum
+                          sed nibh. Sed sapien nibh, tristique ut nunc vel,
+                          pretium varius dui. Nunc non est a risus malesuada
+                          consequat. Nunc quis vehicula nunc, nec auctor dolor.
+                          Proin ut risus egestas, molestie arcu in, varius nisl.
+                          Curabitur orci nisl, commodo et tincidunt at, eleifend
+                          id orci. Maecenas id molestie lectus. Cras condimentum
+                          ullamcorper leo, id dictum sapien. Aliquam suscipit
+                          tempor mauris, vitae interdum velit laoreet et.
+                          Vivamus a tellus metus. Aliquam blandit pulvinar
+                          sapien sed vehicula. Nam vitae finibus nisi, eu tempus
+                          eros.<br /><br />
+
+                          Donec ac ultrices diam. Aliquam feugiat tellus in est
+                          viverra luctus. Suspendisse efficitur nibh massa, eu
+                          sollicitudin magna tristique et. Cras pellentesque
+                          aliquet scelerisque. Interdum et malesuada fames ac
+                          ante ipsum primis in faucibus. Duis enim purus, cursus
+                          at lobortis eget, fringilla sit amet ligula. Proin
+                          risus ligula, luctus tincidunt nisi vitae, tempus
+                          iaculis dolor. Mauris eu condimentum felis. Praesent
+                          eget placerat dolor. Vivamus sed lectus non lorem
+                          ornare blandit sit amet eu quam. Nunc eget ex
+                          efficitur, semper purus eu, vestibulum nunc. Praesent
+                          a aliquam lorem. Quisque sed dui eget velit congue
+                          volutpat. Aliquam erat volutpat.<br /><br />
+
+                          Donec vitae mattis arcu. Nulla est neque, congue non
+                          sagittis et, commodo ut justo. Vivamus orci urna,
+                          pretium et sodales eu, gravida at nulla. Fusce
+                          malesuada massa quis sagittis scelerisque. Mauris
+                          ornare lectus lacus, et posuere magna varius vel. Sed
+                          in viverra felis. Praesent nisi tortor, commodo vel
+                          urna quis, venenatis ultricies ex. Fusce cursus mi in
+                          lectus laoreet consequat. Nam et ipsum elit. Phasellus
+                          iaculis egestas gravida. Aliquam sit amet mi id nisi
+                          facilisis congue id et nibh. Morbi sagittis tristique
+                          leo eu ultricies. Morbi nec suscipit magna.<br /><br
+                            />
+
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Praesent quis felis sapien. Curabitur ante dui,
+                          dictum ac orci eget, euismod faucibus neque.
+                          Pellentesque aliquet, lacus quis mattis elementum,
+                          libero ligula vestibulum neque, sit amet accumsan
+                          ipsum arcu sed diam. Proin turpis sapien, iaculis ac
+                          mattis quis, aliquet ut nisi. Aliquam sed vehicula
+                          enim. Aenean ut facilisis augue, ut euismod enim.
+                          Nulla pretium, massa at venenatis facilisis, felis
+                          sapien fermentum odio, sed bibendum sem sem vel sem.
+                          Praesent non nisi elementum, iaculis orci quis,
+                          suscipit purus. Nulla facilisi. Phasellus laoreet
+                          consectetur erat eu venenatis. Proin neque ipsum,
+                          vehicula sed nisl non, pretium congue massa. Proin
+                          porta dui id turpis aliquam, eget feugiat nisl
+                          tincidunt. Integer felis metus, vestibulum at arcu
+                          quis, maximus efficitur urna.<br /><br />
+
+                          Vestibulum quis accumsan ex. Morbi ut lectus aliquet,
+                          laoreet ex eget, sagittis urna. In et odio maximus,
+                          pellentesque dolor eu, sagittis est. Nunc sed ipsum a
+                          dolor semper facilisis. Mauris viverra ultricies quam
+                          ac porttitor. Proin consequat tincidunt lorem,
+                          convallis volutpat leo vestibulum eu. Aenean eget
+                          vehicula urna. Proin rhoncus condimentum leo. Lorem
+                          ipsum dolor sit amet, consectetur adipiscing elit.
+                          Vestibulum eget dui cursus risus varius sodales in
+                          eget tellus. Sed fringilla, massa ornare tempus
+                          dapibus, sapien leo scelerisque sem, vitae mattis quam
+                          ipsum non augue. Sed nisi mauris, congue a arcu non,
+                          scelerisque tristique arcu. Proin commodo nunc a est
+                          congue facilisis. In ac tempor felis, sit amet iaculis
+                          nibh. Phasellus nec malesuada orci, in viverra massa.</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                          data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- / Modal -->
+                <p class="card-text">This is a wider card with supporting text
+                  below as a natural lead-in to additional content. This content
+                  is a little bit longer.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Fecha: 29-12-2022</small>
+              </div>
+            </div>
+            <div class="card">
+              <img src="./img/noticias-img.jpg" class="card-img-top" alt="imgaen
+                noticias">
+              <div class="card-body">
+                <a href="#" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"><h5 class="card-title">Noticias</h5></a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1"
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Más
+                          sobre la Noticia</h1>
+                        <button type="button" class="btn-close"
+                          data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Ut metus tortor, ullamcorper a tristique eu, rutrum
+                          sed nibh. Sed sapien nibh, tristique ut nunc vel,
+                          pretium varius dui. Nunc non est a risus malesuada
+                          consequat. Nunc quis vehicula nunc, nec auctor dolor.
+                          Proin ut risus egestas, molestie arcu in, varius nisl.
+                          Curabitur orci nisl, commodo et tincidunt at, eleifend
+                          id orci. Maecenas id molestie lectus. Cras condimentum
+                          ullamcorper leo, id dictum sapien. Aliquam suscipit
+                          tempor mauris, vitae interdum velit laoreet et.
+                          Vivamus a tellus metus. Aliquam blandit pulvinar
+                          sapien sed vehicula. Nam vitae finibus nisi, eu tempus
+                          eros.<br /><br />
+
+                          Donec ac ultrices diam. Aliquam feugiat tellus in est
+                          viverra luctus. Suspendisse efficitur nibh massa, eu
+                          sollicitudin magna tristique et. Cras pellentesque
+                          aliquet scelerisque. Interdum et malesuada fames ac
+                          ante ipsum primis in faucibus. Duis enim purus, cursus
+                          at lobortis eget, fringilla sit amet ligula. Proin
+                          risus ligula, luctus tincidunt nisi vitae, tempus
+                          iaculis dolor. Mauris eu condimentum felis. Praesent
+                          eget placerat dolor. Vivamus sed lectus non lorem
+                          ornare blandit sit amet eu quam. Nunc eget ex
+                          efficitur, semper purus eu, vestibulum nunc. Praesent
+                          a aliquam lorem. Quisque sed dui eget velit congue
+                          volutpat. Aliquam erat volutpat.<br /><br />
+
+                          Donec vitae mattis arcu. Nulla est neque, congue non
+                          sagittis et, commodo ut justo. Vivamus orci urna,
+                          pretium et sodales eu, gravida at nulla. Fusce
+                          malesuada massa quis sagittis scelerisque. Mauris
+                          ornare lectus lacus, et posuere magna varius vel. Sed
+                          in viverra felis. Praesent nisi tortor, commodo vel
+                          urna quis, venenatis ultricies ex. Fusce cursus mi in
+                          lectus laoreet consequat. Nam et ipsum elit. Phasellus
+                          iaculis egestas gravida. Aliquam sit amet mi id nisi
+                          facilisis congue id et nibh. Morbi sagittis tristique
+                          leo eu ultricies. Morbi nec suscipit magna.<br /><br
+                            />
+
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Praesent quis felis sapien. Curabitur ante dui,
+                          dictum ac orci eget, euismod faucibus neque.
+                          Pellentesque aliquet, lacus quis mattis elementum,
+                          libero ligula vestibulum neque, sit amet accumsan
+                          ipsum arcu sed diam. Proin turpis sapien, iaculis ac
+                          mattis quis, aliquet ut nisi. Aliquam sed vehicula
+                          enim. Aenean ut facilisis augue, ut euismod enim.
+                          Nulla pretium, massa at venenatis facilisis, felis
+                          sapien fermentum odio, sed bibendum sem sem vel sem.
+                          Praesent non nisi elementum, iaculis orci quis,
+                          suscipit purus. Nulla facilisi. Phasellus laoreet
+                          consectetur erat eu venenatis. Proin neque ipsum,
+                          vehicula sed nisl non, pretium congue massa. Proin
+                          porta dui id turpis aliquam, eget feugiat nisl
+                          tincidunt. Integer felis metus, vestibulum at arcu
+                          quis, maximus efficitur urna.<br /><br />
+
+                          Vestibulum quis accumsan ex. Morbi ut lectus aliquet,
+                          laoreet ex eget, sagittis urna. In et odio maximus,
+                          pellentesque dolor eu, sagittis est. Nunc sed ipsum a
+                          dolor semper facilisis. Mauris viverra ultricies quam
+                          ac porttitor. Proin consequat tincidunt lorem,
+                          convallis volutpat leo vestibulum eu. Aenean eget
+                          vehicula urna. Proin rhoncus condimentum leo. Lorem
+                          ipsum dolor sit amet, consectetur adipiscing elit.
+                          Vestibulum eget dui cursus risus varius sodales in
+                          eget tellus. Sed fringilla, massa ornare tempus
+                          dapibus, sapien leo scelerisque sem, vitae mattis quam
+                          ipsum non augue. Sed nisi mauris, congue a arcu non,
+                          scelerisque tristique arcu. Proin commodo nunc a est
+                          congue facilisis. In ac tempor felis, sit amet iaculis
+                          nibh. Phasellus nec malesuada orci, in viverra massa.</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                          data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- / Modal -->
+                <p class="card-text">This card has supporting text below as a
+                  natural lead-in to additional content.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Fecha: 29-12-2022</small>
+              </div>
+            </div>
+            <div class="card">
+              <img src="./img/noticias-img.jpg" class="card-img-top" alt="imgaen
+                noticias">
+              <div class="card-body">
+                <a href="#" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"><h5 class="card-title">Noticias</h5></a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1"
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Más
+                          sobre la Noticia</h1>
+                        <button type="button" class="btn-close"
+                          data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Ut metus tortor, ullamcorper a tristique eu, rutrum
+                          sed nibh. Sed sapien nibh, tristique ut nunc vel,
+                          pretium varius dui. Nunc non est a risus malesuada
+                          consequat. Nunc quis vehicula nunc, nec auctor dolor.
+                          Proin ut risus egestas, molestie arcu in, varius nisl.
+                          Curabitur orci nisl, commodo et tincidunt at, eleifend
+                          id orci. Maecenas id molestie lectus. Cras condimentum
+                          ullamcorper leo, id dictum sapien. Aliquam suscipit
+                          tempor mauris, vitae interdum velit laoreet et.
+                          Vivamus a tellus metus. Aliquam blandit pulvinar
+                          sapien sed vehicula. Nam vitae finibus nisi, eu tempus
+                          eros.<br /><br />
+
+                          Donec ac ultrices diam. Aliquam feugiat tellus in est
+                          viverra luctus. Suspendisse efficitur nibh massa, eu
+                          sollicitudin magna tristique et. Cras pellentesque
+                          aliquet scelerisque. Interdum et malesuada fames ac
+                          ante ipsum primis in faucibus. Duis enim purus, cursus
+                          at lobortis eget, fringilla sit amet ligula. Proin
+                          risus ligula, luctus tincidunt nisi vitae, tempus
+                          iaculis dolor. Mauris eu condimentum felis. Praesent
+                          eget placerat dolor. Vivamus sed lectus non lorem
+                          ornare blandit sit amet eu quam. Nunc eget ex
+                          efficitur, semper purus eu, vestibulum nunc. Praesent
+                          a aliquam lorem. Quisque sed dui eget velit congue
+                          volutpat. Aliquam erat volutpat.<br /><br />
+
+                          Donec vitae mattis arcu. Nulla est neque, congue non
+                          sagittis et, commodo ut justo. Vivamus orci urna,
+                          pretium et sodales eu, gravida at nulla. Fusce
+                          malesuada massa quis sagittis scelerisque. Mauris
+                          ornare lectus lacus, et posuere magna varius vel. Sed
+                          in viverra felis. Praesent nisi tortor, commodo vel
+                          urna quis, venenatis ultricies ex. Fusce cursus mi in
+                          lectus laoreet consequat. Nam et ipsum elit. Phasellus
+                          iaculis egestas gravida. Aliquam sit amet mi id nisi
+                          facilisis congue id et nibh. Morbi sagittis tristique
+                          leo eu ultricies. Morbi nec suscipit magna.<br /><br
+                            />
+
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Praesent quis felis sapien. Curabitur ante dui,
+                          dictum ac orci eget, euismod faucibus neque.
+                          Pellentesque aliquet, lacus quis mattis elementum,
+                          libero ligula vestibulum neque, sit amet accumsan
+                          ipsum arcu sed diam. Proin turpis sapien, iaculis ac
+                          mattis quis, aliquet ut nisi. Aliquam sed vehicula
+                          enim. Aenean ut facilisis augue, ut euismod enim.
+                          Nulla pretium, massa at venenatis facilisis, felis
+                          sapien fermentum odio, sed bibendum sem sem vel sem.
+                          Praesent non nisi elementum, iaculis orci quis,
+                          suscipit purus. Nulla facilisi. Phasellus laoreet
+                          consectetur erat eu venenatis. Proin neque ipsum,
+                          vehicula sed nisl non, pretium congue massa. Proin
+                          porta dui id turpis aliquam, eget feugiat nisl
+                          tincidunt. Integer felis metus, vestibulum at arcu
+                          quis, maximus efficitur urna.<br /><br />
+
+                          Vestibulum quis accumsan ex. Morbi ut lectus aliquet,
+                          laoreet ex eget, sagittis urna. In et odio maximus,
+                          pellentesque dolor eu, sagittis est. Nunc sed ipsum a
+                          dolor semper facilisis. Mauris viverra ultricies quam
+                          ac porttitor. Proin consequat tincidunt lorem,
+                          convallis volutpat leo vestibulum eu. Aenean eget
+                          vehicula urna. Proin rhoncus condimentum leo. Lorem
+                          ipsum dolor sit amet, consectetur adipiscing elit.
+                          Vestibulum eget dui cursus risus varius sodales in
+                          eget tellus. Sed fringilla, massa ornare tempus
+                          dapibus, sapien leo scelerisque sem, vitae mattis quam
+                          ipsum non augue. Sed nisi mauris, congue a arcu non,
+                          scelerisque tristique arcu. Proin commodo nunc a est
+                          congue facilisis. In ac tempor felis, sit amet iaculis
+                          nibh. Phasellus nec malesuada orci, in viverra massa.</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                          data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- / Modal -->
+                <p class="card-text">This is a wider card with supporting text
+                  below as a natural lead-in to additional content. This card
+                  has even longer content than the first to show that equal
+                  height action.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Fecha: 29-12-2022</small>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </section>
+      <!-- / Secciones del Main -->
+    </main>
+    <footer style="background-color: rgb(207, 207, 207);">
+      <div class="container">
+        <div class="row row-cols-auto pt-4">
+          <div class="col"><a href="#"><img src="img/facebook.svg" alt="logo
+                facebook"
+                width="30px"></div></a>
+          <div class="col"><a href="#"><img src="img/instagram.svg" alt="logo
+                facebook"
+                width="30px"></a></div>
+          <div class="col"><a href="#"><img src="img/twitter.svg" alt="logo
+                facebook"
+                width="30px"></a></div>
+          <div class="col"><a href="#"><img src="img/youtube.svg" alt="logo
+                facebook"
+                width="30px"></a></div>
+        </div>
+      </div>
+      <div class="container pt-2 pb-2 text-center small">
+        <div class="row justify-content-md-center row-cols-2 row-cols-sm-3
+          row-cols-md-3 row-cols-lg-4">
+          <div class="col "><a class="nav-link" href="#">▪ Inversores</a></div>
+          <div class="col "><a class="nav-link" href="#">▪ Centro de Ayuda</a></div>
+          <div class="col "><a class="nav-link" href="#">▪ Privacidad</a></div>
+          <div class="col "><a class="nav-link" href="#">▪ Terminos de uso</a></div>
+          <div class="col "><a class="nav-link" href="#">▪ Contactanos</a></div>
+          <div class="col "><a class="nav-link" href="#">▪ Avisos legales</a></div>
+          <div class="col "><a class="nav-link" href="#">▪ Empleo</a></div>
+          <div class="col "><a class="nav-link" href="#">▪ Informacion
+              coorporativa</a></div>
+        </div>
+      </div>
+      <div class="container text-center pt-3 pb-1 small">
+        <div>
+          <p>© Drechos reservados:
+            <a class="text-success"
+              href="https://www.linkedin.com/in/fernando-f-feijoo/"
+              target="_blank">Fernando F. Feijoo 👨‍💻
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <!-- Scripts del sitio -->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <!-- / Scripts del sitio -->
+  </body>
+</html>
