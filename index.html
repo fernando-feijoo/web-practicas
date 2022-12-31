@@ -6,7 +6,11 @@
     <link href="./csslocal/index.css" rel="stylesheet" />
     <link href="./css/bootstrap.min.css" rel="stylesheet" />
     <title>Pagina TV</title>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ewwink/clappr-quality-selector-plugin@latest/quality-selector.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr-stats/dist/clappr-stats.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr-nerd-stats/dist/clappr-nerd-stats.min.js"></script>
   </head>
   <body>
     <header>
@@ -83,32 +87,14 @@
               <p class="text-center fw-bold">Video en vivo</p>
               <!-- Video de la web "en vivo" -->
               <div class="video-responsive">
-                <!-- Crea un elemento de video -->
-                <video id="mi-reproductor" controls></video>
-
-                <!-- Inicializa HLS.js y carga el archivo m3u8 -->
+                <div id="player"></div>
                 <script>
-                  var reproductor = document.getElementById('mi-reproductor');
-                  if(Hls.isSupported()) {
-                    var hls = new Hls();
-                    hls.loadSource('http://160.20.164.171:25461/live/0703049528/mo73/1.m3u8');
-                    hls.attachMedia(reproductor);
-                    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                      reproductor.play();
+                  var player = new Clappr.Player({
+                    source: "http://160.20.164.171:25461/live/0703049528/mo73/1.m3u8", 
+                    parentId: "#player", 
+                    plugins: [QualitySelector, ClapprNerdStats, ClapprStats],
+                    autoPlay: true
                     });
-                  }
-                  // En caso contrario, intenta utilizar el reproductor nativo de HLS del navegador
-                  else if (reproductor.canPlayType('application/vnd.apple.mpegurl')) {
-                    reproductor.src = 'http://160.20.164.171:25461/live/0703049528/mo73/1.m3u8';
-                    reproductor.addEventListener('loadedmetadata', function() {
-                      reproductor.play();
-                    });
-                  }
-                  
-                  // Actualiza el buffer cada 5 segundos
-                  setInterval(function() {
-                    hls.startLoad(reproductor.currentTime);
-                  }, 1000);
                 </script>
               </div>
               <!-- / Video de la web "en vivo" -->

@@ -13,7 +13,7 @@ body {
     position:relative;
     height: 0;
 }
-.video-responsive #mi-reproductor{ /* Se debe cambiar la etiqueta para el nuevo video seguen su nombre de id */
+.video-responsive #player{ /* Se debe cambiar la etiqueta para el nuevo video seguen su nombre de id */
     left:0;
     top:0;
     height:100%;
