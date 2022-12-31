@@ -11,9 +11,9 @@ body {
     overflow:hidden;
     padding-bottom: 400px; /* Adecua este valor para controlar la altura del video */
     position:relative;
-    height:0;
+    height: 0;
 }
-.video-responsive #player{
+.video-responsive #mi-reproductor{ /* Se debe cambiar la etiqueta para el nuevo video seguen su nombre de id */
     left:0;
     top:0;
     height:100%;
